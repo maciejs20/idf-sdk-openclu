@@ -8,6 +8,7 @@ lwIP socket limit. The package is published as a release asset so PlatformIO can
 
 | Release | Package version | Base | Changes vs base |
 |---|---|---|---|
+| `sdk-esp32-3.3.8-h-panel.1` | `5.5.4+panel.1` | `esp32-core-3.3.8-libs` | high_perf setup reproduced (XIP, -O2, cache I/D 16/32 KB, data line 64 B, `LCD_RGB_RESTART_IN_VSYNC` off), `CONFIG_LWIP_MAX_SOCKETS` 48, `CONFIG_LWIP_MAX_ACTIVE_TCP` 48 |
 | `sdk-esp32-3.2.0-h-panel.1` | `5.4.1+panel.1` | `esp32-3.2.0-h` (high_perf) | `CONFIG_LWIP_MAX_SOCKETS` 16 → 48, `CONFIG_LWIP_MAX_ACTIVE_TCP` 16 → 48 |
 
 Chips and memory variants included: `esp32` (`qio_qspi`) and `esp32s3` (`qio_opi`). Other chips and variants are
@@ -23,6 +24,9 @@ framework = arduino
 ```
 
 ## Provenance
+
+- `sdk-esp32-3.3.8-h-panel.1`: base `https://github.com/espressif/arduino-esp32/releases/download/3.3.8/esp32-core-3.3.8-libs.tar.xz`; built with `esp32-arduino-lib-builder` `14a0af9`, ESP-IDF `735507283d` (v5.5.4), arduino-esp32 `c6428be92`, tinyusb `eae25b531`. Use with pioarduino 55.03.38; `lib_archive = yes` keeps boards without Wi-Fi free of Wi-Fi.
+- `sdk-esp32-3.2.0-h-panel.1`:
 
 - Base package: `https://dl.espressif.com/AE/esp-arduino-libs/esp32-3.2.0-h.zip` (Espressif high_perf build).
 - Built with `esp32-arduino-lib-builder` at `a3c4d2c3deba06173c8889c094c212ff359857e9` (`high_perf/v3.2.0`),
