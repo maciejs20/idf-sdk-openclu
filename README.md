@@ -8,6 +8,7 @@ lwIP socket limit. The package is published as a release asset so PlatformIO can
 
 | Release | Package version | Base | Changes vs base |
 |---|---|---|---|
+| `sdk-esp32-3.3.8-h-panel.4` | `5.5.4+panel.4` | `esp32-core-3.3.8-libs` | as `panel.3`, plus on esp32s3 `CONFIG_PM_PROFILING`, `CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC`, `CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY`, `CONFIG_HEAP_TASK_TRACKING`, `CONFIG_LWIP_TCP_WND_DEFAULT` 11520, `CONFIG_LWIP_TCP_SND_BUF_DEFAULT` 11488 |
 | `sdk-esp32-3.3.8-h-panel.3` | `5.5.4+panel.3` | `esp32-core-3.3.8-libs` | as `panel.2`, plus `CONFIG_LWIP_IP_FORWARD` off (so `CONFIG_LWIP_IPV4_NAPT` and `CONFIG_LWIP_IPV4_NAPT_PORTMAP` are gone) |
 | `sdk-esp32-3.3.8-h-panel.1` | `5.5.4+panel.1` | `esp32-core-3.3.8-libs` | high_perf setup reproduced (XIP, -O2, cache I/D 16/32 KB, data line 64 B, `LCD_RGB_RESTART_IN_VSYNC` off), `CONFIG_LWIP_MAX_SOCKETS` 48, `CONFIG_LWIP_MAX_ACTIVE_TCP` 48 |
 | `sdk-esp32-3.2.0-h-panel.1` | `5.4.1+panel.1` | `esp32-3.2.0-h` (high_perf) | `CONFIG_LWIP_MAX_SOCKETS` 16 → 48, `CONFIG_LWIP_MAX_ACTIVE_TCP` 16 → 48 |
@@ -26,6 +27,7 @@ framework = arduino
 
 ## Provenance
 
+- `sdk-esp32-3.3.8-h-panel.4` (2026-11-13): same base, builder and source pins as `panel.1`; built by `scripts/build/build_sdk.sh` of `maciejs20/espPlatform` at `8c412d3` (release 0.14.0). The `sdkconfig` changes vs `panel.3` are esp32s3 only: power management profiling, mbedTLS allocations in PSRAM, `EXT_RAM_BSS_ATTR` objects in PSRAM, heap task tracking, TCP window 5760 → 11520 and send buffer 5744 → 11488; esp32 unchanged.
 - `sdk-esp32-3.3.8-h-panel.3` (2026-11-11): same base, builder and source pins as `panel.1`; built by `scripts/build/build_sdk.sh` of `maciejs20/espPlatform` at `eae4a41` (branch `op/sdk-panel3`, release 0.11.1). The only `sdkconfig` change vs `panel.2` is `CONFIG_LWIP_IP_FORWARD` not set (its dependents `CONFIG_LWIP_IPV4_NAPT` and `CONFIG_LWIP_IPV4_NAPT_PORTMAP` drop out), so a client of the device's open configuration access point cannot reach its station network.
 - `sdk-esp32-3.3.8-h-panel.1`: base `https://github.com/espressif/arduino-esp32/releases/download/3.3.8/esp32-core-3.3.8-libs.tar.xz`; built with `esp32-arduino-lib-builder` `14a0af9`, ESP-IDF `735507283d` (v5.5.4), arduino-esp32 `c6428be92`, tinyusb `eae25b531`. Use with pioarduino 55.03.38; `lib_archive = yes` keeps boards without Wi-Fi free of Wi-Fi.
 - `sdk-esp32-3.2.0-h-panel.1`:
@@ -42,6 +44,8 @@ framework = arduino
   `esp_serial_slave_link`, `esp_wifi_remote`) that are not part of the esp32/esp32s3 libraries of the base either.
 
 ## Checksums
+
+`esp32-3.3.8-h-panel.4.zip`: sha256 `dcf9882ae257082e61d012eb3417f2008fb6673258c68dad105e5d248c7647a0`
 
 `esp32-3.3.8-h-panel.3.zip`: sha256 `b3e6e27ca3eff37659e3a1cb1f008e3201f4313a9522616a19e6f0e759bf8df4`
 
